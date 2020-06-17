@@ -36,7 +36,7 @@ spec:
       serviceAccountName: order-servuceaccount
       containers:
       - name: order
-        image: image-registry.openshift-image-registry.svc:5000/mesh/order@sha256:8a58a8ecdd795a4ae657a63bf8e4d40ac7543c603255089016cee59a89e18fc7
+        image: docker.io/wohshon/order:v1 
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
