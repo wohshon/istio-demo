@@ -27,7 +27,7 @@ router.post('/submit', function(req, res, next) {
   };
   console.log(post_options.host);
   var post_req = http.request(post_options, function(post_res) {
-      var response;
+      var response='';
       post_res.setEncoding("utf8");
       post_res.on('data', function (chunk) {
           console.log('Response: ' + chunk);
