@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/order', function(req, res, next) {
-  res.send("hello");
+  res.send("hello-v2");
 });
 module.exports = router;
 
