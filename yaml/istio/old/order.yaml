@@ -33,7 +33,6 @@ spec:
         app: order
         version: v1
     spec:
-      serviceAccountName: order-servuceaccount
       containers:
       - name: order
         image: docker.io/wohshon/order:v1 

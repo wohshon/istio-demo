@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: order-service
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: order-service
+        version: v1
+    spec:
+      containers:
+      - name: order
+        image: docker.io/wohshon/order:v1
+        env:
+        - name: BACKEND_URL
+          value: inventory-service.apps.svc.cluster.local
+        - name: BACKEND_PORT
+          value: "8080"      
+        resources: {}
+status: {}

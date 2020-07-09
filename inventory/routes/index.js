@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
 router.post('/inventory', function(req, res, next) {
   var order=(req.body);
  order.status="submitted";
-  console.log(order);
+ order["inventory-version"] = "v2";
+   console.log(order);
  // var inv = {"id": order.id, qty:1000};
  // inv.qty -= order.qty;  
   res.send(JSON.stringify(order));
