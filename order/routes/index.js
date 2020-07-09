@@ -15,7 +15,7 @@ router.post('/submit', function(req, res, next) {
   console.log(req.body);
   console.log(req.body.product);
   console.log(req.body.id);
-  req.body["order-version"] = "v2";  
+  req.body["order-version"] = "v1";  
   var post_options = {
       host: process.env.BACKEND_URL || "192.168.0.110",
       port: process.env.BACKEND_PORT || "8080",
