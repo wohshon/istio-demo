@@ -9,17 +9,12 @@ router.get('/', function(req, res, next) {
 router.post('/inventory', function(req, res, next) {
   var order=(req.body);
  order.status="submitted";
- order["inventory-version"] = "v3";
+ order["inventory-version"] = process.env.VERSION || "v1";
    console.log(order);
- // var inv = {"id": order.id, qty:1000};
- // inv.qty -= order.qty;  
   setTimeout(function() {
     console.log("done...");
-
     res.send(JSON.stringify(order));
-  }
-   
+  }   
   , process.env.TIMEOUT ||  3000);
-  //res.send(JSON.stringify(order));
 });
 module.exports = router;

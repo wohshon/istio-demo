@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/hello', function(req, res, next) {
-  res.send("hello-v2");
+  res.send("hello-"+process.env.VERSION || "v1");
 });
 module.exports = router;
 
@@ -15,7 +15,8 @@ router.post('/submit', function(req, res, next) {
   console.log(req.body);
   console.log(req.body.product);
   console.log(req.body.id);
-  req.body["order-version"] = "v3"; 
+  //inject version to pass to downstream service
+  req.body["order-version"] = process.env.VERSION || "v1"; 
   var headers = {
       "Content-type": "application/json"
   }
