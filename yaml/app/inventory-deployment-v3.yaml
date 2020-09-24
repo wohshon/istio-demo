@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: inventory-service
+  name: inventory-service-v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      creationTimestamp: null
+      labels:
+        app: inventory-service
+        version: v3
+    spec:
+      containers:
+      - image: docker.io/wohshon/inventory:v3
+        name: inventory
+        env:
+        - name: TIMEOUT
+          value: "5000"
+        resources: {}
+status: {}

@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: store
+spec:
+  hosts:
+  - inventory-service
+  http:
+  - route:
+    - destination:
+        host: order-service
+        subset: v1
+        port:
+          number: 8080
+

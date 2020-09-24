@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: inventory-service
+  name: inventory-service-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      creationTimestamp: null
+      labels:
+        app: inventory-service
+        version: v2
+    spec:
+      containers:
+      - image: docker.io/wohshon/inventory:v2
+        name: inventory
+        resources: {}
+status: {}

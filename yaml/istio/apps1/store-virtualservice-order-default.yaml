@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: order-service
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - store-gateway
+  http:
+  - match:
+    - uri:
+        exact: /submit
+    route:
+    - destination:
+        host: order-service
+        port:
+          number: 8080
+

@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/hello', function(req, res, next) {
-  res.send("hello-v1");
+  res.send("hello-"+process.env.VERSION || "v1");
 });
 module.exports = router;
 
@@ -15,15 +15,24 @@ router.post('/submit', function(req, res, next) {
   console.log(req.body);
   console.log(req.body.product);
   console.log(req.body.id);
-  
+  //inject version to pass to downstream service
+  req.body["order-version"] = process.env.VERSION || "v1"; 
+  var headers = {
+      "Content-type": "application/json"
+  }
+
+  if (req.headers['end-user'] )
+  {
+    console.log(req.headers['end-user']);
+    headers["end-user"] = req.headers["end-user"];
+  }
+  console.log(headers);
   var post_options = {
       host: process.env.BACKEND_URL || "192.168.0.110",
       port: process.env.BACKEND_PORT || "8080",
       path: "/inventory",
       method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      }
+      headers: headers
   };
   console.log(post_options.host);
   var post_req = http.request(post_options, function(post_res) {

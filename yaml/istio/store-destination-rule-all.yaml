@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: order-service
+spec:
+  host: order-service
+  subsets:
+  - name: v1
+    labels:
+      app : order-service
+      version: v1
+  - name: v2
+    labels:
+      app: order-service
+      version: v2
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: inventory-service
+spec:
+  host: inventory-service
+  subsets:
+  - name: v1
+    labels:
+      app: inventory-service
+      version: v1
+  - name: v2
+    labels:
+      app: inventory-service
+      version: v2
