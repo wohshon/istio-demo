@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: order-v2
+ labels:
+    app: order
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+      version: v2
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: order
+        version: v2
+    spec:
+      containers:
+      - env:
+        - name: BACKEND_PORT
+          value: "8080"
+        - name: BACKEND_URL
+          value: inventory.apps.svc.cluster.local
+        - name: PORT
+          value: "8080"
+        - name: VERSION
+          value: v2
+        image: docker.io/wohshon/order:latest
+        imagePullPolicy: IfNotPresent
+        name: order
+        ports:
+        - containerPort: 8080
+          protocol: TCP

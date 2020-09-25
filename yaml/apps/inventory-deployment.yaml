@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: inventory-v2
+ labels:
+    app: inventory
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory
+      version: v2
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: inventory
+        version: v2
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "8080"
+        - name: TIMEOUT
+          value: "0"
+        - name: VERSION
+          value: v2
+        image: docker.io/wohshon/inventory:latest
+        imagePullPolicy: IfNotPresent
+        name: inventory
+        ports:
+        - containerPort: 8080
+          protocol: TCP
