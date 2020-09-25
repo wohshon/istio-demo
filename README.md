@@ -14,7 +14,7 @@
 
 - create virtual service to point to generic order service
 
-        oc create -f yaml/istio/apps-virtualservice.yaml 
+        oc create -f yaml/istio/apps-virtualservice-default.yaml 
 
 - test the basic service via ingress gateway route (assume istio components are installed in `istio-system` project)
 
@@ -25,6 +25,18 @@
 - expect results of the following, note that `order-version` and `inventory-version` will toggle between v1 and v2 as the service selectors do not differeniate the versions, in other words, they are load balanced 
 
         {"id":"123","status":"submitted","product":"apple","qty":500,"order-version":"v2","inventory-version":"v1"}
+
+
+
+### other test cases
+
+- route to order service, with subset v1
+
+        oc replace -f apps-virtualservice-v1.yaml
+
+        oc create -f apps-destination-rule-v1.yaml
+
+This rule will always return order service with version `v1`
 
 ## To deploy using s2i for other generic usecases
 
