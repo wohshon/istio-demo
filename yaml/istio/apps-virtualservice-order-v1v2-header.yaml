@@ -21,7 +21,7 @@ spec:
   - route:
     - destination:
         host: order
-       port:
+        port:
           number: 8080
         subset: v1
 

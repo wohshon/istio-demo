@@ -38,7 +38,20 @@
 
 This rule will always return order service with version `v1`
 
+- routing based on header value , based on header value of `end-user: jason`, it will route to order v2, if not order v1
+
+		oc replace -f yaml/istio/apps-virtualservice-order-v1v2-header.yaml
+
+		oc create -f yaml/istio/apps-destination-rule-order-v2.yaml
+
+Call service with header value and observe output, then test without header value
+
+		curl -X POST -H 'Content-type: application/json' -H 'end-user: jason' http://$GATEWAY_URL/submit -d '{"id": "123","status":"new", "product": "apple", "qty":500}'
+
+
+
 - other sample virtual services and rules are available in yaml/istio directory for reference
+
 
 
 ### Reset to default, no special dest rules
