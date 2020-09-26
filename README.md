@@ -4,7 +4,7 @@
 
 - Order Service calls Inventory Service
 
-- to deploy sample apps
+- to deploy sample apps, the following scripts deploys a `order` and `inventory` service; `order` service calls `inventory` service to echo a json payload passed into `order` service.
 
     deploy-apps.sh
 
@@ -37,6 +37,9 @@
         oc create -f apps-destination-rule-order-v1.yaml
 
 This rule will always return order service with version `v1`
+
+- other sample virtual services and rules are available in yaml/istio directory for reference
+
 
 ### Reset to default, no special dest rules
 
