@@ -14,5 +14,5 @@ spec:
         host: inventory
         port:
           number: 8080
-          subset: v2
+        subset: v2
 
