@@ -10,7 +10,7 @@
 
 - create ingress gateway for order service
 
-        oc create -f yaml/istio/apps-apps-gateway.yaml 
+        oc create -f yaml/istio/apps-gateway.yaml 
 
 - create virtual service to point to generic order service
 
