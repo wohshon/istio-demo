@@ -6,7 +6,7 @@
 
 - to deploy sample apps, the following scripts deploys a `order` and `inventory` service; `order` service calls `inventory` service to echo a json payload passed into `order` service.
 
-    deploy-apps.sh
+		deploy-apps.sh
 
 - create ingress gateway for order service
 
