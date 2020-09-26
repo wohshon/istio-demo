@@ -14,7 +14,7 @@
 
 - create virtual service to point to generic order service
 
-        oc create -f yaml/istio/apps-virtualservice-default.yaml 
+        oc create -f yaml/istio/apps-virtualservice-all-default.yaml 
 
 - test the basic service via ingress gateway route (assume istio components are installed in `istio-system` project)
 
@@ -32,11 +32,16 @@
 
 - route to order service, with subset v1
 
-        oc replace -f apps-virtualservice-v1.yaml
+        oc replace -f apps-virtualservice-order-v1.yaml
 
-        oc create -f apps-destination-rule-v1.yaml
+        oc create -f apps-destination-rule-order-v1.yaml
 
 This rule will always return order service with version `v1`
+
+### Reset to default, no special dest rules
+
+		oc replace -f yaml/istio/apps-virtualservice-all-default.yaml 
+
 
 ## To deploy using s2i for other generic usecases
 
@@ -64,5 +69,5 @@ export BACKEND_PORT=<port number> # of inventory service
 export TIMEOUT=3500 # simulate timeout
 export VERSION=v2 # specify version number of inventory service
 ```
-`curl -X POST -H 'Content-type: application/json' http://order-mesh.apps.cluster-sgp-75d2.sgp-75d2.example.opentlc.com/submit -d '{"id": "123","status":"new", "product": "apple", "qty":500}'`
+`curl -X POST -H 'Content-type: application/json' http:/hostname/submit -d '{"id": "123","status":"new", "product": "apple", "qty":500}'`
 
