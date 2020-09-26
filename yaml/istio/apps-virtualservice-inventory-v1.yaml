@@ -1,19 +1,18 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: apps
+  name: inventory
 spec:
   hosts:
-  - "*"
-  gateways:
-  - apps-gateway
+  - inventory
   http:
   - match:
     - uri:
-        exact: /submit
+        prefix: /inventory
     route:
     - destination:
-        host: order
+        host: inventory
         port:
           number: 8080
-        subset: v1 # refer to destination rule of order, and subset v1
+          subset: v1
+
