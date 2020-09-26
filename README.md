@@ -32,9 +32,9 @@
 
 - route to order service, with subset v1
 
-        oc replace -f apps-virtualservice-order-v1.yaml
+         oc replace -f yaml/istio/apps-virtualservice-order-v1.yaml
 
-        oc create -f apps-destination-rule-order-v1.yaml
+        oc create -f yaml/istio/apps-destination-rule-order-v1.yaml
 
 This rule will always return order service with version `v1`
 
